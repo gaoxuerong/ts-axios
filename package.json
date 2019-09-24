@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "ts-axios",
   "version": "0.0.0",
   "description": "",
@@ -11,19 +10,6 @@
     "dist"
   ],
   "author": "gaoxuerong <gaoxuerong123@gmail.com>",
-=======
-  "name": "--libraryname--",
-  "version": "0.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "dist/--libraryname--.umd.js",
-  "module": "dist/--libraryname--.es5.js",
-  "typings": "dist/types/--libraryname--.d.ts",
-  "files": [
-    "dist"
-  ],
-  "author": "--username-- <--usermail-->",
->>>>>>> 9e79c038939cf9ff549fa7508d60234688ec0a41
   "repository": {
     "type": "git",
     "url": ""
@@ -131,8 +117,4 @@
     "typedoc": "^0.12.0",
     "typescript": "^3.0.3"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9e79c038939cf9ff549fa7508d60234688ec0a41
