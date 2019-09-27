@@ -5,7 +5,7 @@ function encode(val: string): string {
     .replace('/%3A/ig', ':')
     .replace('/%24/g', '$')
     .replace('/%2C/ig', ',')
-    .replace('/%20/g', '+')
+    .replace('/%20/g', '+')// %20代表空格
     .replace('/%5B/ig', '[')
     .replace('/%5D/ig', ']')
 }
