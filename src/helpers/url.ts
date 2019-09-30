@@ -9,9 +9,7 @@ function encode(val: string): string {
     .replace('/%5B/ig', '[')
     .replace('/%5D/ig', ']')
 }
-/**
- * 上边的是用URL编码形式表示的 ASCII 字符
-*/
+// 上边的是用URL编码形式表示的 ASCII 字符
 export function buildUrl(url: string, params?: any): string {
   if(!params) {
     return url
