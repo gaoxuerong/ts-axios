@@ -4,6 +4,7 @@ import { buildUrl } from './helpers/url'
 import { transformRequest } from "./helpers/data"
 import { processHeaders } from './helpers/headers'
 function axios(config: AxiosRequestConfig): void  {
+  console.log(config)
   processConfig(config)
   xhr(config)
 }
