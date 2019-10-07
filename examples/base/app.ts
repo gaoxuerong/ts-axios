@@ -1,10 +1,10 @@
 import axios from '../../src/index'
-
+// get请求
 axios({
   method: 'get',
   url: '/base/get',
   params: {
-    foo: ['bar', 'baz']
+    foo:['bar','baz']
   }
 })
 
@@ -13,7 +13,7 @@ axios({
   url: '/base/get',
   params: {
     foo: {
-      bar: 'baz'
+      bar:'baz'
     }
   }
 })
@@ -32,7 +32,7 @@ axios({
   method: 'get',
   url: '/base/get',
   params: {
-    foo: '@:$, '
+    foo:'@:$, '
   }
 })
 
@@ -40,8 +40,8 @@ axios({
   method: 'get',
   url: '/base/get',
   params: {
-    foo: 'bar',
-    baz: null
+    foo:'bar',
+    baz:null
   }
 })
 
@@ -49,7 +49,7 @@ axios({
   method: 'get',
   url: '/base/get#hash',
   params: {
-    foo: 'bar'
+    foo:'bar'
   }
 })
 
@@ -57,15 +57,16 @@ axios({
   method: 'get',
   url: '/base/get?foo=bar',
   params: {
-    bar: 'baz'
+    bar:'baz'
   }
 })
 
+// post请求
 axios({
   method: 'post',
   url: '/base/post',
   data: {
-    a: 1,
-    b: 2
+    a:1,
+    b:2
   }
 })

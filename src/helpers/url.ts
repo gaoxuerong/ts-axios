@@ -1,13 +1,13 @@
 import { isPlainObject,isDate } from './utils'
 function encode(val: string): string {
   return encodeURIComponent(val)
-    .replace('/%40/g', '@')
-    .replace('/%3A/ig', ':')
-    .replace('/%24/g', '$')
-    .replace('/%2C/ig', ',')
-    .replace('/%20/g', '+')
-    .replace('/%5B/ig', '[')
-    .replace('/%5D/ig', ']')
+  .replace(/%40/g, '@')
+  .replace(/%3A/gi, ':')
+  .replace(/%24/g, '$')
+  .replace(/%2C/gi, ',')
+  .replace(/%20/g, '+')
+  .replace(/%5B/gi, '[')
+  .replace(/%5D/gi, ']')
 }
 // 上边的是用URL编码形式表示的 ASCII 字符
 export function buildUrl(url: string, params?: any): string {
@@ -33,7 +33,7 @@ export function buildUrl(url: string, params?: any): string {
       } else if (isPlainObject(value)) {
         value = JSON.stringify(value)
       }
-      parts.push(`${encode(key)} = ${encode(value)}`)
+      parts.push(`${encode(key)}=${encode(value)}`)
     })
   })
   let serializeParams = parts.join('&')
