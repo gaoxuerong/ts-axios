@@ -13,8 +13,8 @@ export type method =
   | 'PUT'
 export interface AxiosRequestConfig {
   url: string
-  method?: string
+  method?: method
   params?: any
-  data?: any
   headers?: any
+  data?: any
 }

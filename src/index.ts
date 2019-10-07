@@ -4,7 +4,6 @@ import { buildUrl } from './helpers/url'
 import { transformRequest } from "./helpers/data"
 import { processHeaders } from './helpers/headers'
 function axios(config: AxiosRequestConfig): void  {
-  console.log(config)
   processConfig(config)
   xhr(config)
 }
@@ -26,6 +25,6 @@ function transformRequestData(config: AxiosRequestConfig): any {
 // 对于headers
 function transformHeaders(config: AxiosRequestConfig): any {
   const { headers = {}, data } = config
-  processHeaders(headers,data)
+  return processHeaders(headers,data)
 }
 export default axios
