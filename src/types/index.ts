@@ -26,6 +26,7 @@ export interface Axios {
 }
 // 首先定义一个 Axios 类型接口，它描述了 Axios 类中的公共方法，接着定义了 AxiosInstance 接口继承 Axios，它就是一个混合类型的接口
 export interface AxiosInstance extends Axios {
+  interceptors: any;
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>
   // 我们增加了一种函数的定义,它支持两个参数，url是必选，config是可选参数
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -60,6 +61,20 @@ export interface AxiosError extends Error {
   request?: any
   response?: AxiosResponse
   isAxiosError: boolean
+}
+// 拦截器泛型接口定义，对于 resolve 函数的参数，请求拦截器和响应拦截器是不同的
+export interface AxiosInterceptorManager<T> {
+  use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
+
+  eject(id: number): void
+}
+
+export interface ResolvedFn<T=any> {
+  (val: T): T | Promise<T>
+}
+
+export interface RejectedFn {
+  (error: any): any
 }
 
 
