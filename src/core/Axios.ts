@@ -5,7 +5,15 @@ import dispatchRequest from './dispatchRequest'
 */
 // 创建Axios类，来实现接口定义的公共方法
 export default class Axios {
-  request(config: AxiosRequestConfig): AxiosPromise {
+  request(url: any, config?: any): AxiosPromise {
+    if (typeof url === 'string') {
+      if (!config) {
+        config = {}
+      }
+      config.url = url
+    } else {
+      config = url
+    }
     return dispatchRequest(config)
   }
 

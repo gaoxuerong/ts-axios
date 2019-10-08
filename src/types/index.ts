@@ -27,11 +27,13 @@ export interface Axios {
 // 首先定义一个 Axios 类型接口，它描述了 Axios 类中的公共方法，接着定义了 AxiosInstance 接口继承 Axios，它就是一个混合类型的接口
 export interface AxiosInstance extends Axios {
   (config: AxiosRequestConfig): AxiosPromise
+  // 我们增加了一种函数的定义,它支持两个参数，url是必选，config是可选参数
+  (url: string, config?: AxiosRequestConfig): AxiosPromise
 }
 
 
 export interface AxiosRequestConfig {
-  url: string // 请求的url
+  url?: string // 请求的url
   method?: Method // 请求方法
   params?: any // 请求参数
   headers?: any // 请求头内容

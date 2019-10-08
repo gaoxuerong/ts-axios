@@ -18,7 +18,8 @@ function processConfig(config: AxiosRequestConfig): void {
 // 对于get请求
 function transformUrl(config: AxiosRequestConfig): string {
   const { url, params } = config
-  return buildUrl(url,params)
+  // url!是类型断言，确保 url存在
+  return buildUrl(url!,params)
 }
 // 对于post请求
 function transformRequestData(config: AxiosRequestConfig): any {
