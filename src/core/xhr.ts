@@ -20,7 +20,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     if (responseType) {
       request.responseType = responseType
     }
-    request.open(method.toUpperCase(), url, true)
+    // url!是类型断言，确保 url存在
+    request.open(method.toUpperCase(), url!, true)
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) {
         return
