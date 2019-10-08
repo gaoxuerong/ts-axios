@@ -80,24 +80,50 @@ import axios from '../../src/index'
 
 // post请求和headers相关
 
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   headers: {
+//     'content-type': 'application/json',
+//     'Accept': 'application/json, */*,text/plain'
+//   },
+//   data: {
+//     a: 333,
+//     b: 666
+//   }
+// })
+
+// const paramsString = 'q=URLUtils.searchParams&topic=api'
+// const searchParams = new URLSearchParams(paramsString)
+
+// axios({
+//   method: 'post',
+//   url: '/base/post',
+//   data: searchParams
+// })
+
+// promise链式调用
+// tslint:disable-next-line: no-floating-promises
 axios({
   method: 'post',
   url: '/base/post',
-  headers: {
-    'content-type': 'application/json',
-    'Accept': 'application/json, */*,text/plain'
-  },
   data: {
-    a: 333,
-    b: 666
+    a: 1,
+    b: 2
   }
+}).then((res) => {
+  console.log(res)
 })
 
-const paramsString = 'q=URLUtils.searchParams&topic=api'
-const searchParams = new URLSearchParams(paramsString)
-
+// tslint:disable-next-line: no-floating-promises
 axios({
   method: 'post',
   url: '/base/post',
-  data: searchParams
+  responseType: 'json',
+  data: {
+    a: 3,
+    b: 4
+  }
+}).then((res) => {
+  console.log(res)
 })

@@ -19,3 +19,22 @@ export function processHeaders(headers: any, data: any): any {
   }
   return headers
 }
+// 解析headers,request.getAllResponseHeaders()得到的headers是一堆字符串，用parseHeaders来解析它们
+export function parseHeaders(headers: string): any {
+  let parsed = Object.create(null)
+  if (!headers) {
+    return parsed
+  }
+  headers.split('\r\n').forEach((line) => {
+    let [key,val] = line.split(':')
+    key = key.trim().toLowerCase()
+    if (!key) {
+      return
+    }
+    if (val) {
+      val = val.trim()
+    }
+    parsed[key] = val
+  })
+  return parsed
+}
