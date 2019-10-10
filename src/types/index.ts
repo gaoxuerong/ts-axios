@@ -14,6 +14,7 @@ export type Method =
   | 'patch'
   | 'PATCH'
   // 定义Axios接口类型
+  // 添加范型参数<T>，T=any 表示泛型的类型参数默认值为 any
 export interface Axios {
   request<T = any>(config: AxiosRequestConfig): AxiosPromise<T>
   get<T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
@@ -42,7 +43,8 @@ export interface AxiosRequestConfig {
   responseType?: XMLHttpRequestResponseType // 对于一个 AJAX 请求的 response，可以指定它响应的数据类型，它的定义是 "" | "arraybuffer" | "blob" | "document" | "json" | "text" 字符串字面量类型
   timeout?: number // 设置某个请求的超时时间
 }
-// 响应接口类型
+// 响应接口类型，
+// 添加范型参数<T>，T=any 表示泛型的类型参数默认值为 any
 export interface AxiosResponse<T = any> {
   data: T // 服务端返回的数据
   status: number // http状态码
