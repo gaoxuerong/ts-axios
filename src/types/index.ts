@@ -64,17 +64,16 @@ export interface AxiosError extends Error {
   response?: AxiosResponse
   isAxiosError: boolean
 }
-// 拦截器泛型接口定义，对于 resolve 函数的参数，请求拦截器和响应拦截器是不同的
+// 拦截器泛型接口定义，因为对于 resolve 函数的参数，请求拦截器和响应拦截器是不同的
 export interface AxiosInterceptorManager<T> {
   use(resolved: ResolvedFn<T>, rejected?: RejectedFn): number
-
   eject(id: number): void
 }
-
+// resolve请求拦截器类型是AxiosRequestConfig，响应拦截器类型是AxiosResponse，所以用范型
 export interface ResolvedFn<T=any> {
   (val: T): T | Promise<T>
 }
-
+// reject函数参数类型是any
 export interface RejectedFn {
   (error: any): any
 }
