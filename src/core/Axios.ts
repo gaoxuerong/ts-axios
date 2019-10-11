@@ -21,8 +21,10 @@ interface PromiseChain {
 */
 // 创建Axios类，来实现接口定义的公共方法
 export default class Axios {
+  defaults: AxiosRequestConfig
   interceptors: Interceptors
-  constructor() {
+  constructor(initconfig:AxiosRequestConfig) {
+    this.defaults = initconfig // 默认配置
     this.interceptors = {
       request: new InterceptorManager<AxiosRequestConfig>(),
       response: new InterceptorManager<AxiosResponse>()
