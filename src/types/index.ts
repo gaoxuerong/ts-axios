@@ -47,7 +47,7 @@ export interface AxiosRequestConfig {
   data?: any // 请求传给服务端的数据
   responseType?: XMLHttpRequestResponseType // 对于一个 AJAX 请求的 response，可以指定它响应的数据类型，它的定义是 "" | "arraybuffer" | "blob" | "document" | "json" | "text" 字符串字面量类型
   timeout?: number // 设置某个请求的超时时间
-  [propName: string]: any
+  [propName: string]: any // 字符串索引签名，对应core文件夹下mergeConfig.ts文件下的mergeField函数， strat(config1[key],config2![key])中config1[key]的key不知道类型，所以用字符串索引签名
 }
 // 响应接口类型，
 // 添加范型参数<T>，T=any 表示泛型的类型参数默认值为 any
