@@ -8,6 +8,7 @@ import {
 } from '../types'
 import dispatchRequest from './dispatchRequest'
 import InterceptorManager from './InterceptorManager'
+import mergeConfig from './mergeConfig'
 interface Interceptors {
   request: InterceptorManager<AxiosRequestConfig>
   response: InterceptorManager<AxiosResponse>
@@ -39,6 +40,8 @@ export default class Axios {
     } else {
       config = url
     }
+    // this.defaults和config做个合并
+    config = mergeConfig(this.defaults,config)
     const chain: PromiseChain[] = [{
       resolved: dispatchRequest,
       rejected: undefined
