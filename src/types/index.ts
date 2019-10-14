@@ -1,5 +1,5 @@
 export type Method =
-  'get'
+  | 'get'
   | 'GET'
   | 'post'
   | 'POST'
@@ -13,8 +13,9 @@ export type Method =
   | 'PUT'
   | 'patch'
   | 'PATCH'
-  // 定义Axios接口类型
-  // 添加范型参数<T>，T=any 表示泛型的类型参数默认值为 any
+// 响应数据支持泛型；通常情况下，我们会把后端返回数据格式单独放入一个接口中；
+// 定义Axios接口类型
+// 添加范型参数<T>，T=any 表示泛型的类型参数默认值为 any
 export interface Axios {
   defaults: AxiosRequestConfig
   interceptors: {
@@ -32,12 +33,12 @@ export interface Axios {
 }
 // 首先定义一个 Axios 类型接口，它描述了 Axios 类中的公共方法，接着定义了 AxiosInstance 接口继承 Axios，它就是一个混合类型的接口
 export interface AxiosInstance extends Axios {
-  interceptors: any;
+  interceptors: any
   <T = any>(config: AxiosRequestConfig): AxiosPromise<T>
-  // 我们增加了一种函数的定义,它支持两个参数，url是必选，config是可选参数
+  // 我们增加了一种函数的定义,它支持两个参数，url是必选，config是可选参数；
+  // 使 axios 函数支持两个参数
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
-
 
 export interface AxiosRequestConfig {
   url?: string // 请求的url
@@ -60,8 +61,7 @@ export interface AxiosResponse<T = any> {
   request: any // 请求的 XMLHttpRequest 对象实例 request
 }
 // axios 返回的是 AxiosPromise 类型
-export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {
-}
+export interface AxiosPromise<T = any> extends Promise<AxiosResponse<T>> {}
 // axios的error,用于外部使用
 export interface AxiosError extends Error {
   config: AxiosRequestConfig
@@ -76,12 +76,10 @@ export interface AxiosInterceptorManager<T> {
   eject(id: number): void
 }
 // resolve请求拦截器类型是AxiosRequestConfig，响应拦截器类型是AxiosResponse，所以用范型
-export interface ResolvedFn<T=any> {
+export interface ResolvedFn<T = any> {
   (val: T): T | Promise<T>
 }
 // reject函数参数类型是any
 export interface RejectedFn {
   (error: any): any
 }
-
-

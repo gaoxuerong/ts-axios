@@ -12,6 +12,7 @@ function normalizeHeaderName(headers: any, normalizeName: string): void {
     }
   })
 }
+// 对post请求的header做处理，没有Content-Type的，默认值为application/json;charset=utf-8，
 export function processHeaders(headers: any, data: any): any {
   normalizeHeaderName(headers, 'Content-Type')
   if (isPlainObject(data)) {

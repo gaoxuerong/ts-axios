@@ -1,21 +1,18 @@
-import { AxiosRequestConfig,AxiosPromise,AxiosResponse } from '../types/index'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types/index'
 import { parseHeaders } from '../helpers/headers'
 import { createError } from '../helpers/error'
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
-  return new Promise((resolve,reject) => {
-    const { data = null, url, method = 'get', headers = {},responseType, timeout } = config
+  return new Promise((resolve, reject) => {
+    const { data = null, url, method = 'get', headers = {}, responseType, timeout } = config
     const request = new XMLHttpRequest()
     if (timeout) {
       request.timeout = timeout
     }
     // 超时处理
     request.ontimeout = function handleTimeout() {
-      reject(createError(
-        `Timeout of ${config.timeout} ms exceeded`,
-        config,
-        'ECONNABORTED',
-        request
-      ))
+      reject(
+        createError(`Timeout of ${config.timeout} ms exceeded`, config, 'ECONNABORTED', request)
+      )
     }
     if (responseType) {
       request.responseType = responseType
@@ -30,7 +27,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
         return
       }
       const responseHeaders = parseHeaders(request.getAllResponseHeaders())
-      const responseData = responseType && responseType !== 'text' ? request.response : request.responseText
+      const responseData =
+        responseType && responseType !== 'text' ? request.response : request.responseText
       const response: AxiosResponse = {
         data: responseData,
         status: request.status,
@@ -46,31 +44,28 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       if (response.status >= 200 && response.status < 300) {
         resolve(response)
       } else {
-        reject(createError(
-          `Request failed with status code ${response.status}`,
-          config,
-          null,
-          request,
-          response
-        ))
+        reject(
+          createError(
+            `Request failed with status code ${response.status}`,
+            config,
+            null,
+            request,
+            response
+          )
+        )
       }
     }
     // netWork异常
     request.onerror = function handleError() {
-      reject(createError(
-        'Network Error',
-        config,
-        null,
-        request
-      ))
+      reject(createError('Network Error', config, null, request))
     }
     Object.keys(headers).forEach(name => {
-      if (data === null && name.toLowerCase() === 'content-type' ) {
-        delete headers[name]
+      if (data === null && name.toLowerCase() === 'content-type') {
+        delete headers[name] // 当我们传入的 data 为空的时候，请求 header 配置 Content-Type 是没有意义的，于是我们把它删除。
       } else {
-        request.setRequestHeader(name,headers[name])
+        request.setRequestHeader(name, headers[name])
       }
-    });
+    })
     request.send(data)
   })
 }

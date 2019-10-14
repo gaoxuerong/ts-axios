@@ -6,7 +6,7 @@ import { processHeaders, flattenHeaders } from '../helpers/headers'
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
   return xhr(config).then(res => {
-    return transformResponseData(res)
+    return transformResponseData(res) // 处理响应data
   })
 }
 // 处理xhr的url
@@ -22,7 +22,7 @@ function transformUrl(config: AxiosRequestConfig): string {
   // url!是类型断言，确保 url存在
   return buildUrl(url!, params)
 }
-// 对于post请求
+// 对于post请求,转换请求 body 的数据
 function transformRequestData(config: AxiosRequestConfig): any {
   return transformRequest(config.data)
 }
@@ -31,7 +31,7 @@ function transformHeaders(config: AxiosRequestConfig): any {
   const { headers = {}, data } = config
   return processHeaders(headers, data)
 }
-// 对于post请求，我们传给它们data对象，返回的时候，JSON.stringify会做处理，变成字符串，现在再做处理，使返回的字符串变成对象
+// 在我们不去设置 responseType 的情况下，当服务端返回给我们的数据是字符串类型，我们可以尝试去把它转换成一个 JSON 对象
 function transformResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transformResponse(res.data)
   return res
