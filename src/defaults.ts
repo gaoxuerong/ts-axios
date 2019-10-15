@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from './types/index';
+import { AxiosRequestConfig } from './types/index'
 /**
  * 我们希望ts-axios能有些默认的配置，用户传递的配置可以和默认配置做一层合并；
  * 其中对于 headers 的默认配置支持 common 和一些请求 method 字段；
@@ -9,17 +9,17 @@ const defaults: AxiosRequestConfig = {
   timeout: 0,
   headers: {
     common: {
-      Accept: 'application/json, text/plain, */*',
+      Accept: 'application/json, text/plain, */*'
     }
   }
 }
-const methodsNoData = ['delete','head','options','get']
-methodsNoData.forEach((method) =>{
+const methodsNoData = ['delete', 'head', 'options', 'get']
+methodsNoData.forEach(method => {
   defaults.headers[method] = {}
 })
 
-const methodsWithData = ['delete','head','options','get']
-methodsWithData.forEach((method) =>{
+const methodsWithData = ['post', 'put', 'patch']
+methodsWithData.forEach(method => {
   defaults.headers[method] = {
     'Content-Type': 'application/x-www-form-urlencoded'
   }

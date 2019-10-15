@@ -3,6 +3,7 @@ import qs from 'qs'
 
 axios.defaults.headers.common['test2'] = 123
 
+// tslint:disable-next-line: no-floating-promises
 axios({
   url: '/config/post',
   method: 'post',
@@ -14,6 +15,4 @@ axios({
   }
 }).then((res) => {
   console.log(res.data)
-}).catch((e) => {
-  throw new Error(e)
 })
