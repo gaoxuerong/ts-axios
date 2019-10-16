@@ -14,12 +14,14 @@ function normalizeHeaderName(headers: any, normalizeName: string): void {
 }
 // 对post请求的header做处理，没有Content-Type的，默认值为application/json;charset=utf-8，
 export function processHeaders(headers: any, data: any): any {
+  console.log(headers)
   normalizeHeaderName(headers, 'Content-Type')
   if (isPlainObject(data)) {
     if (headers && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json;charset=utf-8'
     }
   }
+  console.log(headers)
   return headers
 }
 // 解析headers,request.getAllResponseHeaders()得到的headers是一堆字符串，用parseHeaders来解析它们
