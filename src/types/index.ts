@@ -39,7 +39,9 @@ export interface AxiosInstance extends Axios {
   // 使 axios 函数支持两个参数
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
-
+export interface AxiosStatic extends AxiosInstance {
+  create(config?: AxiosRequestConfig): AxiosInstance
+}
 export interface AxiosRequestConfig {
   url?: string // 请求的url
   method?: Method // 请求方法

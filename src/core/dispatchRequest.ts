@@ -5,9 +5,17 @@ import { flattenHeaders } from '../helpers/headers'
 import transform from './transform' // 转换请求和响应
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
-  return xhr(config).then(res => {
-    return transformResponseData(res) // 处理响应data
-  })
+  return xhr(config).then(
+    res => {
+      return transformResponseData(res) // 处理响应data
+    },
+    e => {
+      if (e && e.response) {
+        e.response = transformResponseData(e.response)
+      }
+      return Promise.reject(e)
+    }
+  )
 }
 // 处理xhr的url
 function processConfig(config: AxiosRequestConfig): void {
