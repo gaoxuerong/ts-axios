@@ -53,6 +53,20 @@ export interface AxiosRequestConfig {
   [propName: string]: any // 字符串索引签名，对应core文件夹下mergeConfig.ts文件下的mergeField函数， strat(config1[key],config2![key])中config1[key]的key不知道类型，所以用字符串索引签名
   transformRequest?: AxiosTransformer | AxiosTransformer[] // transformRequest允许你在将请求数据发送到服务器之前对其进行修改；这只适用于请求方法 put、post 和 patch
   transformResponse?: AxiosTransformer | AxiosTransformer[] // transformResponse 允许你在把响应数据传递给 then 或者 catch 之前对它们进行修改
+  cancelToken?: CancelToken
+}
+// 实例类型的接口定义
+export interface CancelToken {
+  promise: Promise<String>
+  reason?: string
+}
+// 取消方法的接口定义
+export interface Canceler {
+  (message?: string): void
+}
+// CancelExecutor 是 CancelToken 类构造函数参数的接口定义
+export interface CancelExecutor {
+  (cancel: Canceler): void
 }
 export interface AxiosTransformer {
   (data: any, headers?: any): any
