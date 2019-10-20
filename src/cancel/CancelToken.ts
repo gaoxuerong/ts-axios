@@ -1,20 +1,21 @@
 import { CancelExecutor, CancelTokenSource, Canceler } from '../types/index'
+import Cancel from './Cancel' // Cancel不仅当作类型，还当作值来用
 interface ResolvePromise {
-  (reason?: string): void
+  (reason?: Cancel): void
 }
 export default class CancelToken {
-  promise: Promise<string>
-  reason?: string
+  promise: Promise<Cancel>
+  reason?: Cancel
   constructor(executor: CancelExecutor) {
     let resolvePromise: ResolvePromise
-    this.promise = new Promise<string>(resolve => {
+    this.promise = new Promise<Cancel>(resolve => {
       resolvePromise = resolve
     })
     executor(message => {
       if (this.reason) {
         return
       }
-      this.reason = message
+      this.reason = new Cancel(message)
       resolvePromise(this.reason)
     })
   }
