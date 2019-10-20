@@ -19,6 +19,11 @@ export default class CancelToken {
       resolvePromise(this.reason)
     })
   }
+  throwIfRequested(): void {
+    if (this.reason) {
+      throw this.reason
+    }
+  }
   static source(): CancelTokenSource {
     let cancel!: Canceler
     const token = new CancelToken(c => {

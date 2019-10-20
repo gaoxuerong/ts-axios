@@ -62,6 +62,7 @@ export interface AxiosRequestConfig {
 export interface CancelToken {
   promise: Promise<Cancel>
   reason?: Cancel
+  throwIfRequested(): void
 }
 // 取消方法的接口定义
 export interface Canceler {
