@@ -50,6 +50,7 @@ export function buildUrl(url: string, params?: any): string {
   }
   return url
 }
+// 判断是否同源
 export function isURLSameOrigin(requestURL: string): boolean {
   const parsedOrigin = resolveURL(requestURL)
   return (
