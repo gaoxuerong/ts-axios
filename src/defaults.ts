@@ -14,6 +14,8 @@ const defaults: AxiosRequestConfig = {
       Accept: 'application/json, text/plain, */*'
     }
   },
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
   // 把之前对请求数据和响应数据的处理逻辑，放到了默认配置中，也就是默认处理逻辑。
   transformRequest: [
     function(data: any, headers: any): any {

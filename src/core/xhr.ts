@@ -79,6 +79,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       }
     })
     if (cancelToken) {
+      // 取消功能的实现，第二种使用方式
+      // tslint:disable-next-line: no-floating-promises
       cancelToken.promise.then(reason => {
         request.abort()
         reject(reason)
