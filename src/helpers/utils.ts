@@ -11,6 +11,10 @@ export function isDate(val: any): val is Object {
 export function isPlainObject(val: any): val is Object {
   return toString.call(val) === '[object Object]'
 }
+// 上传文件用的
+export function isFormData(val: any): val is FormData {
+  return typeof val !== 'undefined' && val instanceof FormData
+}
 /* extend使用了交叉类型，并且用到了类型断言，extend 方法的实现用到了交叉类型，并且用到了类型断言。
  * extend 的最终目的是把 from 里的属性都扩展到 to 中，包括原型上的属性
  */

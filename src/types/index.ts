@@ -61,6 +61,8 @@ export interface AxiosRequestConfig {
   withCredentials?: boolean // 允许跨域的变量
   xsrfHeaderName?: string // 请求header中token对应的header名称
   xsrfCookieName?: string // 存储token的cookie名称
+  onDownloadProgress?: (e: ProgressEvent) => void
+  onUploadProgress?: (e: ProgressEvent) => void
 }
 // 实例类型的接口定义
 export interface CancelToken {

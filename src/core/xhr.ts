@@ -15,7 +15,9 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       cancelToken,
       withCredentials,
       xsrfCookieName,
-      xsrfHeaderName
+      xsrfHeaderName,
+      onDownloadProgress,
+      onUploadProgress
     } = config
     const request = new XMLHttpRequest()
     if (withCredentials) {
@@ -74,6 +76,12 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     // netWork异常
     request.onerror = function handleError() {
       reject(createError('Network Error', config, null, request))
+    }
+    if (onDownloadProgress) {
+      request.onprogress = onDownloadProgress
+    }
+    if (onUploadProgress) {
+      request.upload.onprogress = onUploadProgress
     }
     if ((withCredentials || isURLSameOrigin(url!)) && xsrfCookieName) {
       const xsrfValue = cookie.read(xsrfCookieName)
