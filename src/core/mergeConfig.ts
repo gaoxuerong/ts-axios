@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from './../types/index'
 import { isPlainObject, deepMerge } from '../helpers/utils'
 const strats = Object.create(null) // 合并策略map
 const stratKeysFromVal2 = ['url', 'params', 'data']
-const stratKeysDeepMerge = ['headers']
+const stratKeysDeepMerge = ['headers', 'auth']
 stratKeysFromVal2.forEach(key => {
   strats[key] = fromVal2Strat
 })

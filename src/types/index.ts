@@ -63,6 +63,12 @@ export interface AxiosRequestConfig {
   xsrfCookieName?: string // 存储token的cookie名称
   onDownloadProgress?: (e: ProgressEvent) => void
   onUploadProgress?: (e: ProgressEvent) => void
+  auth?: AxiosBasicCredentials
+}
+
+export interface AxiosBasicCredentials {
+  username: string
+  password: string
 }
 // 实例类型的接口定义
 export interface CancelToken {
