@@ -30,6 +30,7 @@ export interface Axios {
   post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
   put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
   patch<T = any>(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise<T>
+  getUri(config?: AxiosRequestConfig): string
 }
 // 首先定义一个 Axios 类型接口，它描述了 Axios 类中的公共方法，接着定义了 AxiosInstance 接口继承 Axios，它就是一个混合类型的接口
 export interface AxiosInstance extends Axios {
@@ -39,12 +40,18 @@ export interface AxiosInstance extends Axios {
   // 使 axios 函数支持两个参数
   <T = any>(url: string, config?: AxiosRequestConfig): AxiosPromise<T>
 }
+export interface AxiosClassStatic {
+  new (config: AxiosRequestConfig): Axios
+}
 export interface AxiosStatic extends AxiosInstance {
   // axios扩展了多个静态方法
   create(config?: AxiosRequestConfig): AxiosInstance
   CancelToken: CancelTokenStatic
   Cancel: CancelStatic
   isCancel: (value: any) => boolean
+  all<T>(promises: Array<T | Promise<T>>): Promise<T[]>
+  spread<T, R>(callback: (...args: T[]) => R): (arr: T[]) => R
+  Axios: AxiosClassStatic
 }
 export interface AxiosRequestConfig {
   url?: string // 请求的url
