@@ -1,6 +1,7 @@
-import axios from '../../src/index'
+import axios, { AxiosError } from '../../src/index'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import qs from 'qs'
 // document.cookie = 'a=b'
 
 // axios.get('/more/get').then(res => {
@@ -71,15 +72,72 @@ import 'nprogress/nprogress.css'
 //   }
 // })
 // tslint:disable-next-line: no-floating-promises
-axios.post('/more/post', {
-  a: 1
-}, {
-  auth: {
-    username: 'gaoxuerong',
-    password: '123456'
-  }
-}).then(res => {
-  console.log(res)
-}).catch((e) => {
-  console.log(e)
+// axios.post('/more/post', {
+//   a: 1
+// }, {
+//   auth: {
+//     username: 'gaoxuerong',
+//     password: '123456'
+//   }
+// }).then(res => {
+//   console.log(res)
+// }).catch((e) => {
+//   console.log(e)
+// })
+// 自定义合法验证码
+// axios.get('/more/304').then(res => {
+//   console.log(res)
+// }).catch((e: AxiosError) => {
+//   console.log(e.message)
+// })
+// axios.get('/more/304', {
+//   validateStatus(status) {
+//     return status >= 200 && status < 400
+//   }
+// }).then(res => {
+//   console.log(res)
+// }).catch((e: AxiosError) => {
+//   console.log(e.message)
+// })
+
+// tslint:disable-next-line: no-floating-promises
+// axios.get('/more/get', {
+//   params: new URLSearchParams('a=b&c=d')
+// }).then(res => {
+//   console.log(res)
+// })
+
+// // tslint:disable-next-line: no-floating-promises
+// axios.get('/more/get', {
+//   params: {
+//     a: 1,
+//     b: 2,
+//     c: ['a', 'b', 'c']
+//   }
+// }).then(res => {
+//   console.log(res)
+// })
+
+// const instance = axios.create({
+//   paramsSerializer(params) {
+//     return qs.stringify(params, { arrayFormat: 'brackets' })
+//   }
+// })
+
+// // tslint:disable-next-line: no-floating-promises
+// instance.get('/more/get', {
+//   params: {
+//     a: 1,
+//     b: 2,
+//     c: ['a', 'b', 'c']
+//   }
+// }).then(res => {
+//   console.log(res)
+// })
+const instance = axios.create({
+  baseURL: 'https://img.mukewang.com/'
 })
+
+instance.get('5cc01a7b0001a33718720632.jpg')
+
+instance.get('https://img.mukewang.com/szimg/5becd5ad0001b89306000338-360-202.jpg')

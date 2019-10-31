@@ -27,7 +27,11 @@ const defaults: AxiosRequestConfig = {
     function(data: any): any {
       return transformResponse(data)
     }
-  ]
+  ],
+  // 验证http/https的状态码,默认是200～300，可以自定义
+  validateStatus(status: number): boolean {
+    return status >= 200 && status < 300
+  }
 }
 const methodsNoData = ['delete', 'head', 'options', 'get']
 methodsNoData.forEach(method => {

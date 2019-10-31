@@ -19,7 +19,8 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       xsrfHeaderName,
       onDownloadProgress,
       onUploadProgress,
-      auth
+      auth,
+      validateStatus
     } = config
     const request = new XMLHttpRequest() // 创建一个 request 实例
     // url!是类型断言，确保 url存在
@@ -111,7 +112,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
     }
     // 在200-300之间的http状态码看作是正常的，超出这个范围，也当作错误来处理
     function handleResponse(response: AxiosResponse) {
-      if (response.status >= 200 && response.status < 300) {
+      if (!validateStatus || validateStatus(response.status)) {
         resolve(response)
       } else {
         reject(
