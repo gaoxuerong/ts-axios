@@ -12,5 +12,9 @@ describe('helpers:utils', () => {
     //   expect(isDate(new Date())).toBeTruthy()
     //   expect(isDate(Date.now())).toBeFalsy()
     // })
+    test('should validate PlainObject', () => {
+      expect(isPlainObject({})).toBeTruthy()
+      expect(isPlainObject(new Date())).toBeFalsy()
+    })
   })
 })
