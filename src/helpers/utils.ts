@@ -1,5 +1,5 @@
 const toString = Object.prototype.toString
-
+// 判断是不是对象
 export function isObject(val: any): val is Date {
   return val !== null && typeof val === 'object'
 }
