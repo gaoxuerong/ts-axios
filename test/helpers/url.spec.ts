@@ -8,4 +8,11 @@ describe('helpers:url', () => {
       expect(isURLSameOrigin('https://github.com/axios/axios')).toBeFalsy()
     })
   })
+  describe('isAbsoluteURL', () => {
+    test('should return true if URL begins with valid scheme name', () => {
+      expect(isAbsoluteURL('https://api.github.com/users')).toBeTruthy()
+      expect(isAbsoluteURL('custom-scheme-v1.0://example.com/')).toBeTruthy()
+      expect(isAbsoluteURL('HTTP://example.com/')).toBeTruthy()
+    })
+  })
 })
