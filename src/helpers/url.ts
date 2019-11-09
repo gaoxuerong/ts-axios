@@ -63,6 +63,7 @@ export function buildUrl(
 }
 export function isAbsoluteURL(url: string): boolean {
   // 绝对地址可能以// 开头，也可能以http: 或者https: 开头
+  // custom-scheme-v1.0://
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url)
 }
 export function combineURL(baseURL: string, relativeURL?: string): string {
