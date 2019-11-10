@@ -14,5 +14,9 @@ describe('helpers:url', () => {
       expect(isAbsoluteURL('custom-scheme-v1.0://example.com/')).toBeTruthy()
       expect(isAbsoluteURL('HTTP://example.com/')).toBeTruthy()
     })
+    test('should return false if URL begins with invalid scheme name', () => {
+      expect(isAbsoluteURL('123://example.com/')).toBeFalsy()
+      expect(isAbsoluteURL('!valid://example.com/')).toBeFalsy()
+    })
   })
 })
