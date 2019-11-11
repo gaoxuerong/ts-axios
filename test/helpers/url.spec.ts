@@ -18,5 +18,12 @@ describe('helpers:url', () => {
       expect(isAbsoluteURL('123://example.com/')).toBeFalsy()
       expect(isAbsoluteURL('!valid://example.com/')).toBeFalsy()
     })
+    test('should return true if URL is protocol-relative', () => {
+      expect(isAbsoluteURL('//example.com/')).toBeTruthy()
+    })
+    test('should return false if URL is relative', () => {
+      expect(isAbsoluteURL('/foo')).toBeFalsy()
+      expect(isAbsoluteURL('foo')).toBeFalsy()
+    })
   })
 })
