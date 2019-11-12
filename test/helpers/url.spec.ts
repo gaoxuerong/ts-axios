@@ -1,4 +1,4 @@
-import { isAbsoluteURL, combineURL, isURLSameOrigin } from '../../src/helpers/url'
+import { buildUrl, isAbsoluteURL, combineURL, isURLSameOrigin } from '../../src/helpers/url'
 describe('helpers:url', () => {
   describe('isURLSameOrigin', () => {
     test('should detect same origin', () => {
@@ -45,6 +45,26 @@ describe('helpers:url', () => {
 
     test('should allow a single slash for relative url', () => {
       expect(combineURL('https://api.github.com/users', '/')).toBe('https://api.github.com/users/')
+    })
+  })
+  describe('buildURL', () => {
+    test('should support null params', () => {
+      expect(buildUrl('/foo')).toBe('/foo')
+    })
+    test('should support params', () => {
+      expect(
+        buildUrl('/foo', {
+          foo: 'bar'
+        })
+      ).toBe('/foo?foo=bar')
+    })
+    test('should ignore if some param value is null', () => {
+      expect(
+        buildUrl('/foo', {
+          foo: 'bar',
+          baz: null
+        })
+      ).toBe('/foo?foo=bar')
     })
   })
 })
