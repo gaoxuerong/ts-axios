@@ -66,5 +66,21 @@ describe('helpers:url', () => {
         })
       ).toBe('/foo?foo=bar')
     })
+    test('should ignore if only param value is null', () => {
+      expect(
+        buildUrl('/foo', {
+          foo: null
+        })
+      ).toBe('/foo')
+    })
+    test('should support object params', () => {
+      expect(
+        buildUrl('/foo', {
+          foo: {
+            baz: '123'
+          }
+        })
+      ).toBe('/foo?foo=' + encodeURI('{"baz":"123"}'))
+    })
   })
 })
