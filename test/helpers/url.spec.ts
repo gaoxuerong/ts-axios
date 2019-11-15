@@ -82,5 +82,20 @@ describe('helpers:url', () => {
         })
       ).toBe('/foo?foo=' + encodeURI('{"baz":"123"}'))
     })
+    test('should support date params', () => {
+      const date = new Date()
+      expect(
+        buildUrl('/foo', {
+          date: date
+        })
+      ).toBe('/foo?date=' + date.toISOString)
+    })
+    test('should support array params', () => {
+      expect(
+        buildUrl('/foo', {
+          foo: ['hhh', 'emmm']
+        })
+      ).toBe('/foo?foo=[]hhh&foo=[]emmm')
+    })
   })
 })
