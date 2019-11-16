@@ -97,5 +97,38 @@ describe('helpers:url', () => {
         })
       ).toBe('/foo?foo=[]hhh&foo=[]emmm')
     })
+    test('should support special char params', () => {
+      expect(
+        buildUrl('/foo', {
+          foo: '@:$, '
+        })
+      ).toBe('/foo?foo=@:$,+')
+    })
+    test('should support existing params', () => {
+      expect(
+        buildUrl('/foo?foo=bar', {
+          bar: 'baz'
+        })
+      ).toBe('/foo?foo=bar&bar=baz')
+    })
+    test('should correct discard url hash mark', () => {
+      expect(
+        buildUrl('/foo?foo=bar#hash', {
+          query: 'baz'
+        })
+      ).toBe('/foo?foo=bar&query=baz')
+    })
+    test('should use serializer if provided', () => {
+      const serializer = jest.fn(() => {
+        return 'foo=bar'
+      })
+      const params = { foo: 'bar' }
+      expect(buildUrl('/foo', params, serializer)).toBe('/foo?foo=bar')
+      expect(serializer).toHaveBeenCalled()
+      expect(serializer).toHaveBeenCalledWith(params)
+    })
+    test('should support URLSearchParams', () => {
+      expect(buildUrl('/foo', new URLSearchParams('bar=baz'))).toBe('/foo?bar=baz')
+    })
   })
 })
