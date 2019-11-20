@@ -31,5 +31,19 @@ describe('helper:headers', () => {
       expect(headers['conTenT-Type']).toBeUndefined()
       expect(headers['Content-length']).toBe(1024)
     })
+    test('should set Content-Type if not set and data is PlainObject', () => {
+      const headers: any = {}
+      processHeaders(headers, { a: 1 })
+      expect(headers['Content-Type']).toBe('application/json;charset=utf-8')
+    })
+    test('should not set Content-Type if not set and data is not PlainObject', () => {
+      const headers: any = {}
+      processHeaders(headers, new URLSearchParams('a=b'))
+      expect(headers['Content-Type']).toBeUndefined()
+    })
+    test('should do nothing if headers is undefined or null', () => {
+      expect(processHeaders(undefined, {})).toBeUndefined()
+      expect(processHeaders(null, {})).toBeNull()
+    })
   })
 })
