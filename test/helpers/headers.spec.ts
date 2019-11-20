@@ -1,4 +1,4 @@
-import { parseHeaders } from '../../src/helpers/headers'
+import { parseHeaders, processHeaders } from '../../src/helpers/headers'
 describe('helper:headers', () => {
   describe('parseHeaders', () => {
     test('should parse headers', () => {
@@ -18,6 +18,18 @@ describe('helper:headers', () => {
     })
     test('should return empty object if headers is empty string', () => {
       expect(parseHeaders('')).toEqual({})
+    })
+  })
+  describe('processHeaders', () => {
+    test('should normalize Content-Type header name', () => {
+      const headers: any = {
+        'conTenT-Type': 'foo/bar',
+        'Content-length': 1024
+      }
+      processHeaders(headers, {})
+      expect(headers['Content-Type']).toBe('foo/bar')
+      expect(headers['conTenT-Type']).toBeUndefined()
+      expect(headers['Content-length']).toBe(1024)
     })
   })
 })
