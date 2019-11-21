@@ -1,4 +1,4 @@
-import { parseHeaders, processHeaders } from '../../src/helpers/headers'
+import { parseHeaders, processHeaders, flattenHeaders } from '../../src/helpers/headers'
 describe('helper:headers', () => {
   describe('parseHeaders', () => {
     test('should parse headers', () => {
@@ -44,6 +44,44 @@ describe('helper:headers', () => {
     test('should do nothing if headers is undefined or null', () => {
       expect(processHeaders(undefined, {})).toBeUndefined()
       expect(processHeaders(null, {})).toBeNull()
+    })
+  })
+  describe('flattenHeaders', () => {
+    test('should flatten the headers and include common headers', () => {
+      const headers = {
+        Accept: 'application/json',
+        common: {
+          'X-COMMON-HEADER': 'commonHeaderValue'
+        },
+        get: {
+          'X-GET-HEADER': 'getHeaderValue'
+        },
+        post: {
+          'X-POST-HEADER': 'postHeaderValue'
+        }
+      }
+
+      expect(flattenHeaders(headers, 'get')).toEqual({
+        Accept: 'application/json',
+        'X-COMMON-HEADER': 'commonHeaderValue',
+        'X-GET-HEADER': 'getHeaderValue'
+      })
+    })
+    test('should flatten the headers without common headers', () => {
+      const headers = {
+        Accept: 'application/json',
+        get: {
+          'X-GET-HEADER': 'getHeaderValue'
+        }
+      }
+
+      expect(flattenHeaders(headers, 'patch')).toEqual({
+        Accept: 'application/json'
+      })
+    })
+    test('should do nothing if headers is undefined or null', () => {
+      expect(flattenHeaders(undefined, 'get')).toBeUndefined()
+      expect(flattenHeaders(null, 'post')).toBeNull()
     })
   })
 })
