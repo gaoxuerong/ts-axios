@@ -15,6 +15,7 @@ describe('helpers:utils', () => {
     test('should validate PlainObject', () => {
       expect(isPlainObject({})).toBeTruthy()
       expect(isPlainObject(new Date())).toBeFalsy()
+      expect(isPlainObject(null)).toBeFalsy()
     })
     test('should validate FormData', () => {
       expect(isFormData(new FormData())).toBeTruthy()
